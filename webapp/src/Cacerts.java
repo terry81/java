@@ -64,7 +64,7 @@ public class Cacerts extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("<b>Keystore file: </b>" + filename + "\n\n" + caCerts);
+		response.getWriter().append("<b>Keystore file: </b>" + filename + caCerts);
 	}
 
 }
