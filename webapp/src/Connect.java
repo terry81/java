@@ -33,10 +33,18 @@ public class Connect extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String host = request.getParameter("host");
-		int port = Integer.parseInt(request.getParameter("port"));
 
-		String output = this.conn_test(host, port);
+		String output = "";
+
+		if (request.getParameter("host") == null) {
+			output += "Please specify host as a GET parameter";
+		} else if (request.getParameter("port") == null || Integer.parseInt(request.getParameter("port")) < 1) {
+			output += "Please specify port as a GET parameter and an integer > 1";
+		} else {
+			String host = request.getParameter("host");
+			int port = Integer.parseInt(request.getParameter("port"));
+			output += this.conn_test(host, port);
+		}
 		response.getWriter().append(output);
 	}
 
