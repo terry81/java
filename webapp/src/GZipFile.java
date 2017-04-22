@@ -7,50 +7,46 @@ import java.nio.file.Paths;
 import java.util.zip.GZIPInputStream;
 
 public class GZipFile {
-    private static final String INPUT_GZIP_FILE = "/home/toli/German_adverbs_4.txt.gz";
-    private static final String OUTPUT_FILE = INPUT_GZIP_FILE .replace(".gz","");
-    
-    public static void main( String[] args )
-    {
-    	GZipFile gZip = new GZipFile();
-    	gZip.gunzipIt();
-    }
+	private static final String INPUT_GZIP_FILE = "/home/toli/German_adverbs_4.txt.gz";
+	private static final String OUTPUT_FILE = INPUT_GZIP_FILE.replace(".gz", "");
 
-    /**
-     * GunZip it
-     */
-    public void gunzipIt(){
+	public static void main(String[] args) {
+		GZipFile gZip = new GZipFile();
+		gZip.gunzipIt();
+	}
 
-     byte[] buffer = new byte[1024];
+	/**
+	 * GunZip it
+	 */
+	public void gunzipIt() {
 
-     try{
+		byte[] buffer = new byte[1024];
 
-    	 GZIPInputStream gzis =
-    		new GZIPInputStream(new FileInputStream(INPUT_GZIP_FILE));
+		try {
 
-    	 FileOutputStream out =
-            new FileOutputStream(OUTPUT_FILE);
+			GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(INPUT_GZIP_FILE));
 
-        int len;
-        while ((len = gzis.read(buffer)) > 0) {
-        	out.write(buffer, 0, len);
-        }
+			FileOutputStream out = new FileOutputStream(OUTPUT_FILE);
 
-        gzis.close();
-    	out.close();
+			int len;
+			while ((len = gzis.read(buffer)) > 0) {
+				out.write(buffer, 0, len);
+			}
 
-    	try {
-    	    Files.delete(Paths.get(INPUT_GZIP_FILE));
-    	} catch (NoSuchFileException x) {
-    	    System.err.format("%s: no such" + " file or directory%n", INPUT_GZIP_FILE);
-    	}    	
-    	//Just like with gunzip, remove the old .gz file
+			gzis.close();
+			out.close();
 
-    	System.out.println("Done");
+			// Just like with gunzip, remove the old .gz file
+			try {
+				Files.delete(Paths.get(INPUT_GZIP_FILE));
+			} catch (NoSuchFileException x) {
+				System.err.format("%s: no such" + " file or directory%n", INPUT_GZIP_FILE);
+			}
 
+			System.out.println("Done");
 
-    }catch(IOException ex){
-       ex.printStackTrace();
-    }
-   }
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
 }
