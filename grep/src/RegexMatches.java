@@ -9,7 +9,6 @@ public class RegexMatches {
 		ArrayList<String> matches = new ArrayList<String>();
 
 		try {
-//			Pattern p = Pattern.compile(pattern, Pattern.DOTALL);
 			Pattern p = Pattern.compile(pattern, Pattern.DOTALL);
 			Matcher regexMatcher = p.matcher(content);
 
