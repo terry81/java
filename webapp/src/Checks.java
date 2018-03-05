@@ -13,25 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class Checks
- */
 @WebServlet("/Checks")
 public class Checks extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public Checks() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -51,6 +36,7 @@ public class Checks extends HttpServlet {
 			}
 			in.close();
 		} catch (Exception e) {
+			
 		}
 
 		String sys_info = "<br><br><b>System info:</b> Free memory: " + Runtime.getRuntime().freeMemory()
@@ -58,11 +44,11 @@ public class Checks extends HttpServlet {
 
 		info += hostname;
 		info += ("<br><br><b>JVM:</b> " + System.getProperty("java.version") + "<br>");
-		Enumeration names = request.getHeaderNames();
+		Enumeration<String> names = request.getHeaderNames();
 		while (names.hasMoreElements()) {
 			String name = (String) names.nextElement();
-			Enumeration values = request.getHeaders(name); // support multiple
-															// values
+			Enumeration<String> values = request.getHeaders(name); 
+	
 			if (values != null) {
 				while (values.hasMoreElements()) {
 					String value = (String) values.nextElement();
@@ -78,7 +64,7 @@ public class Checks extends HttpServlet {
 			info += arg;
 		}
 
-		response.getWriter().append(info + sys_info + uptime + context_path + request_info + "</html>");// .append(request.getContextPath());
+		response.getWriter().append(info + sys_info + uptime + context_path + request_info + "</html>");
 
 	}
 

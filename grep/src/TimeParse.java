@@ -1,20 +1,12 @@
-import java.io.IOException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-public class Test {
-
-	static String ACCOUNT = "banjo";
-
+public class TimeParse {
 	public static void main(String[] args) {
-
-		try {
-			Grep2.main(" Jederzeit :", "/home/toli/", ".*test.*", "(That reminds me.*?swallowed)");
-			Grep2.main(" Good lads :", "/home/toli/", ".*test.*", "(Good lads.*?garments)");
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		String inputStr = "Time is 11 minutes past 11PM.";
+		String pattern = "'Time is 'm' minutes past 'ha.";
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
+		LocalTime time = LocalTime.parse(inputStr, dtf);
+		System.out.println(time);
 	}
-
 }
